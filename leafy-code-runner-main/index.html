@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Leafy Code Runner</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles-preset-flowers@2/tsparticles.preset.flowers.min.js"></script>
+</head>
+<body>
+  <div class="app-title">Code Runner</div>
+
+  <div class="main-layout">
+    <!-- Left: Character Display -->
+    <div class="left-game-panel">
+      <canvas id="gameCanvas" width="500" height="500" aria-label="Game animation canvas"></canvas>
+      <button class="green-btn" onclick="runCode()">Run Text Code</button>
+    </div>
+
+    <!-- Right: Code Panels -->
+    <div class="right-code-panel">
+      <textarea id="codeInput" placeholder="Write your command here..." aria-label="Code input"></textarea>
+      <button class="green-btn" onclick="runCode()">Run Text Code</button>
+
+      <!-- Emoji Coding Panel -->
+      <div class="emoji-bar">
+        <h3>Code with Emojis</h3>
+        <button aria-label="Move Right" onclick="addCommand('moveRight(1);', 'move')">🌿➡️</button>
+        <button aria-label="Move Left" onclick="addCommand('moveLeft(1);', 'move')">🍃⬅️</button>
+        <button aria-label="Jump" onclick="addCommand('jump();', 'jump')">🐸⬆️</button>
+        <button aria-label="Wait" onclick="addCommand('wait(1);', 'wait')">🕒</button>
+        <button aria-label="Glow" onclick="addCommand('glow();', 'glow')">💡</button>
+        <button aria-label="Spin" onclick="addCommand('spin();', 'spin')">🌀</button>
+        <button aria-label="Dash" onclick="addCommand('dash();', 'dash')">💨</button>
+        <button aria-label="Float" onclick="addCommand('float();', 'float')">🎈</button>
+      </div>
+
+      <!-- Undo & Clear Buttons -->
+      <div class="code-actions">
+        <button class="green-btn" onclick="undoLastCommand()">↩️ Undo</button>
+        <button class="green-btn" onclick="clearCode()">🧹 Clear</button>
+      </div>
+
+     
+
+      <!-- Predefined Code Hints -->
+      <div class="instructions-blocks">
+        <h3>Quick Add Commands</h3>
+        <div class="instruction" onclick="runCommand('moveRight(1);')">moveRight(n);</div>
+        <div class="instruction" onclick="runCommand('moveLeft(1);')">moveLeft(n);</div>
+        <div class="instruction" onclick="runCommand('jump();')">jump();</div>
+        <div class="instruction" onclick="runCommand('wait(1);')">wait(n);</div>
+      </div>
+
+      <!-- Compiler Output -->
+      <div id="compilerOutput">
+        <h3>Compiler Output</h3>
+        <pre id="tokens"></pre>
+        <pre id="parseTree"></pre>
+      </div>
+    </div>
+  </div>
+
+  <div id="sparkle-container"></div>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
